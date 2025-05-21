@@ -8,16 +8,19 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
     <header class="header">
         <nav class="nav-container">
             <div class="logo">IT9</div>
-            <button class="mobile-menu-button" aria-label="Toggle menu">☰</button>
+            <button class="mobile-menu-button" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
             <ul class="nav-links">
-                <li><a href="#about">About</a></li>
-                <li><a href="#product">Product</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#about"><i class="fas fa-info-circle"></i> About</a></li>
+                <li><a href="#product"><i class="fas fa-box"></i> Product</a></li>
+                <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
             </ul>
         </nav>
     </header>
@@ -27,31 +30,33 @@
             <div class="hero-content">
                 <h1>Smarter Bus Operations, One Stop at a Time</h1>
                 <p class="subheading">Introducing Alpha – our audio-visual announcement system that helps operators meet PSVAIR requirements while laying the foundation for a smarter, integrated bus operation platform.</p>
-                <button class="cta-button" onclick="scrollToContact()">Request a Demo</button>
+                <button class="cta-button" onclick="scrollToContact()">
+                    <i class="fas fa-play-circle"></i> Request a Demo
+                </button>
             </div>
         </section>
 
         <section id="about" class="about">
-            <h2>Driving Better Services for Operators and Passengers</h2>
+            <h2><i class="fas fa-road"></i> Driving Better Services for Operators and Passengers</h2>
             <p>At IT9, we're on a mission to improve the operations of bus services for the benefit of passengers — by providing affordable, all-in-one solutions that simplify compliance, enhance the passenger experience, and reduce operational complexity.</p>
             <p>We know the industry firsthand, having run bus routes across the UK and Asia. From rural services to city routes, we understand the realities operators face — and we're building tools that help.</p>
         </section>
 
         <section id="product" class="product">
-            <h2>Meet Alpha – Built for Compliance. Designed for Growth.</h2>
+            <h2><i class="fas fa-star"></i> Meet Alpha – Built for Compliance. Designed for Growth.</h2>
             <div class="features">
                 <div class="feature">
-                    <span class="feature-icon">✅</span>
+                    <span class="feature-icon"><i class="fas fa-check-circle"></i></span>
                     <h3>PSVAIR Compliant</h3>
                     <p>Fully compliant with latest UK regulations</p>
                 </div>
                 <div class="feature">
-                    <span class="feature-icon">🔊</span>
+                    <span class="feature-icon"><i class="fas fa-volume-up"></i></span>
                     <h3>Clear Communication</h3>
                     <p>High-quality audio & visual announcements</p>
                 </div>
                 <div class="feature">
-                    <span class="feature-icon">⚙️</span>
+                    <span class="feature-icon"><i class="fas fa-cogs"></i></span>
                     <h3>Easy Integration</h3>
                     <p>Simple installation and reliable performance</p>
                 </div>
@@ -59,58 +64,65 @@
         </section>
 
         <section id="why-it9" class="why-it9">
-            <h2>Why IT9?</h2>
+            <h2><i class="fas fa-question-circle"></i> Why IT9?</h2>
             <div class="benefits">
                 <div class="benefit">
-                    <span class="benefit-icon">🚌</span>
+                    <span class="benefit-icon"><i class="fas fa-bus"></i></span>
                     <p>Built by bus operators, for bus operators</p>
                 </div>
                 <div class="benefit">
-                    <span class="benefit-icon">💼</span>
+                    <span class="benefit-icon"><i class="fas fa-building"></i></span>
                     <p>Ideal for small to mid-sized firms</p>
                 </div>
                 <div class="benefit">
-                    <span class="benefit-icon">🤝</span>
+                    <span class="benefit-icon"><i class="fas fa-handshake"></i></span>
                     <p>UK-based support team</p>
                 </div>
                 <div class="benefit">
-                    <span class="benefit-icon">📈</span>
+                    <span class="benefit-icon"><i class="fas fa-chart-line"></i></span>
                     <p>Scalable technology, affordable pricing</p>
                 </div>
             </div>
         </section>
 
         <section id="contact" class="contact">
-            <h2>Interested in Seeing Alpha in Action?</h2>
+            <h2><i class="fas fa-envelope-open-text"></i> Interested in Seeing Alpha in Action?</h2>
             <p>We're now offering early demos and meetings for UK bus and coach operators. Let's discuss how Alpha can support your routes — and hear what features you'd love to see next.</p>
             <form id="contactForm" class="contact-form">
                 <div class="form-group">
+                    <i class="fas fa-user"></i>
                     <input type="text" id="name" name="name" required placeholder="Your Name">
                 </div>
                 <div class="form-group">
+                    <i class="fas fa-building"></i>
                     <input type="text" id="company" name="company" required placeholder="Company Name">
                 </div>
                 <div class="form-group">
+                    <i class="fas fa-envelope"></i>
                     <input type="email" id="email" name="email" required placeholder="Email Address">
                 </div>
                 <div class="form-group">
+                    <i class="fas fa-phone"></i>
                     <input type="tel" id="phone" name="phone" placeholder="Phone Number (optional)">
                 </div>
                 <div class="form-group">
+                    <i class="fas fa-comment"></i>
                     <textarea id="message" name="message" required placeholder="Your Message"></textarea>
                 </div>
-                <button type="submit" class="submit-button">Request a Demonstration</button>
+                <button type="submit" class="submit-button">
+                    <i class="fas fa-paper-plane"></i> Request a Demonstration
+                </button>
             </form>
         </section>
     </main>
 
     <footer class="footer">
         <div class="footer-content">
-            <p>© IT9 Ltd. All Rights Reserved.</p>
+            <p><i class="fas fa-copyright"></i> IT9 Ltd. All Rights Reserved.</p>
             <p>Registered in England & Wales.</p>
             <div class="footer-links">
-                <a href="privacy.html">Privacy Policy</a>
-                <a href="#contact">Contact</a>
+                <a href="privacy.html"><i class="fas fa-shield-alt"></i> Privacy Policy</a>
+                <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
             </div>
         </div>
     </footer>
