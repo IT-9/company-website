@@ -462,6 +462,56 @@ html {
     scroll-behavior: smooth;
 }
 
+/* About section */
+.about-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 2rem;
+    max-width: var(--max-width);
+    margin: 0 auto;
+}
+
+.about-text {
+    flex: 1;
+}
+
+.about-image {
+    flex: 1;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.about-img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Product section */
+.product-showcase {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 2rem;
+    max-width: var(--max-width);
+    margin: 0 auto;
+}
+
+.product-image {
+    flex: 1;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.product-img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .mobile-menu-button {
@@ -579,15 +629,18 @@ html {
 
     .about-content, .product-showcase {
         flex-direction: column;
+        align-items: center;
     }
     
     .hero-image, .about-image, .product-image {
-        max-width: 100%;
-        margin-top: 2rem;
+        margin-bottom: 1.5rem;
+        width: 100%;
+        max-width: 400px;
     }
     
-    .features {
-        margin-top: 2rem;
+    .about-text, .features {
+        width: 100%;
+        text-align: center;
     }
     
     .footer-content {
@@ -732,54 +785,4 @@ html {
     .submit-button {
         min-height: 44px;
     }
-}
-
-/* About section */
-.about-content {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 2rem;
-    max-width: var(--max-width);
-    margin: 0 auto;
-}
-
-.about-text {
-    flex: 1;
-}
-
-.about-image {
-    flex: 1;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
-
-.about-img {
-    width: 100%;
-    height: auto;
-    display: block;
-}
-
-/* Product section */
-.product-showcase {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 2rem;
-    max-width: var(--max-width);
-    margin: 0 auto;
-}
-
-.product-image {
-    flex: 1;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
-
-.product-img {
-    width: 100%;
-    height: auto;
-    display: block;
 } 
