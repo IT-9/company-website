@@ -1,10 +1,17 @@
 :root {
-    --primary-color: #0066cc;
-    --secondary-color: #004999;
+    --primary-color: #db2021;
+    --secondary-color: #c51d1e;
+    --tertiary-color: #e13334;
     --text-color: #333333;
     --light-gray: #f5f5f5;
     --white: #ffffff;
     --max-width: 1200px;
+    
+    /* Additional color variants from Docusaurus */
+    --primary-darker: #ba1b1c;
+    --primary-darkest: #991617;
+    --primary-lighter: #e33e3f;
+    --primary-lightest: #e85f5f;
 }
 
 * {
@@ -65,7 +72,7 @@ body {
 /* Hero Section */
 .hero {
     padding: 8rem 1rem 4rem;
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-darkest));
     color: var(--white);
     text-align: center;
 }
@@ -105,7 +112,7 @@ section h2 {
 /* Features */
 .features {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2rem;
     max-width: var(--max-width);
     margin: 0 auto;
@@ -117,6 +124,12 @@ section h2 {
     background: var(--white);
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .feature-icon {
@@ -128,7 +141,7 @@ section h2 {
 /* Benefits */
 .benefits {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 2rem;
     max-width: var(--max-width);
     margin: 0 auto;
@@ -137,6 +150,12 @@ section h2 {
 .benefit {
     text-align: center;
     padding: 1.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.benefit:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .benefit-icon {
@@ -158,20 +177,54 @@ section h2 {
 }
 
 .form-group {
-    display: flex;
-    flex-direction: column;
+    position: relative;
+    margin-bottom: 1.5rem;
+    width: 100%;
 }
 
-input, textarea {
-    padding: 0.75rem;
+.form-group i {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+    transition: color 0.3s ease;
+    font-size: 1.2rem;
+    z-index: 1;
+}
+
+.form-group textarea + i {
+    top: 1.5rem;
+    transform: none;
+}
+
+.form-group input,
+.form-group textarea {
+    padding: 0.8rem 0.8rem 0.8rem 3rem;
     border: 1px solid #ddd;
     border-radius: 4px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    min-height: 50px;
+    font-size: 16px;
+    width: 100%;
     font-family: inherit;
 }
 
-textarea {
+.form-group textarea {
     min-height: 150px;
     resize: vertical;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(219, 32, 33, 0.2);
+    outline: none;
+}
+
+.form-group input:focus + i,
+.form-group textarea:focus + i {
+    color: var(--primary-color);
 }
 
 /* Buttons */
@@ -179,21 +232,53 @@ textarea {
     background: var(--primary-color);
     color: var(--white);
     border: none;
-    padding: 1rem 2rem;
+    padding: 1rem 1.5rem;
     border-radius: 4px;
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    min-height: 50px;
+    min-width: 150px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .cta-button:hover, .submit-button:hover {
-    background: var(--secondary-color);
+    background: var(--primary-darker);
+}
+
+.cta-button i, 
+.submit-button i {
+    margin-right: 0.75rem;
+    font-size: 1.1rem;
+}
+
+.cta-button:after, .submit-button:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+}
+
+.cta-button:hover:after, .submit-button:hover:after {
+    width: 300px;
+    height: 300px;
 }
 
 /* Footer */
 .footer {
-    background: var(--text-color);
+    background: var(--primary-darkest);
     color: var(--white);
     padding: 2rem 1rem;
 }
@@ -212,10 +297,24 @@ textarea {
     color: var(--white);
     text-decoration: none;
     margin: 0 1rem;
+    padding: 0.75rem 1rem;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .footer-links a:hover {
     text-decoration: underline;
+}
+
+.footer-links a i {
+    margin-right: 0.5rem;
+    transition: transform 0.3s ease;
+}
+
+.footer-links a:hover i {
+    transform: translateY(-2px);
 }
 
 /* Mobile Menu */
@@ -226,12 +325,87 @@ textarea {
     font-size: 1.5rem;
     cursor: pointer;
     color: var(--text-color);
+    padding: 10px;
+    min-height: 44px;
+    min-width: 44px;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+    margin-left: auto;
+    z-index: 1001;
+}
+
+.mobile-menu-button:hover {
+    transform: scale(1.1);
+}
+
+.mobile-menu-button i {
+    font-size: 1.5rem;
+}
+
+/* Improved spacing for mobile */
+p {
+    margin-bottom: 1rem;
+    padding: 0 0.5rem;
+}
+
+/* Icon Styling */
+.feature-icon i,
+.benefit-icon i {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.feature:hover .feature-icon i,
+.benefit:hover .benefit-icon i {
+    transform: scale(1.1);
+    color: var(--secondary-color);
+}
+
+/* Nav links styling */
+.nav-links a {
+    padding: 0.75rem 1rem;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+}
+
+.nav-links a i {
+    margin-right: 0.5rem;
+    font-size: 1.1rem;
+    transition: transform 0.3s ease;
+}
+
+.nav-links a:hover i {
+    transform: translateX(3px);
+}
+
+/* Section heading icons */
+section h2 i {
+    margin-right: 0.5rem;
+    color: var(--primary-color);
+    transition: transform 0.3s ease;
+}
+
+section:hover h2 i {
+    transform: scale(1.1);
+}
+
+/* Mobile menu animation */
+.nav-links {
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Smooth scroll behavior */
+html {
+    scroll-behavior: smooth;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
     .mobile-menu-button {
-        display: block;
+        display: flex;
     }
 
     .nav-links {
@@ -243,10 +417,34 @@ textarea {
         background: var(--white);
         padding: 1rem;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        flex-direction: column;
+        width: 100%;
+        gap: 0;
+        transform: translateY(-10px);
+        opacity: 0;
+        pointer-events: none;
+        z-index: 1000;
     }
 
     .nav-links.active {
         display: flex;
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: all;
+    }
+
+    .nav-links a {
+        width: 100%;
+        padding: 1rem;
+        border-bottom: 1px solid #eee;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    .nav-links a i {
+        width: 1.5rem;
+        text-align: center;
     }
 
     .nav-container {
@@ -286,23 +484,43 @@ textarea {
 
     .contact-form {
         padding: 0 1rem;
+        width: 100%;
+    }
+    
+    .form-group {
+        width: 100%;
     }
 
-    input, textarea {
-        font-size: 16px; /* Prevents zoom on iOS */
-        padding: 0.875rem;
+    .form-group i {
+        font-size: 1.4rem;
+        left: 0.8rem;
+    }
+    
+    .form-group input,
+    .form-group textarea {
+        padding: 0.8rem 0.8rem 0.8rem 3rem;
+        min-height: 50px;
+        width: 100%;
+        font-size: 16px;
     }
 
     .cta-button, .submit-button {
         width: 100%;
         padding: 1rem;
         font-size: 1rem;
+        margin: 0 auto;
+        display: flex;
+    }
+
+    .feature-icon i,
+    .benefit-icon i {
+        font-size: 2.2rem;
     }
 }
 
 @media (max-width: 480px) {
     .hero h1 {
-        font-size: 1.75rem;
+        font-size: 1.8rem;
     }
 
     .subheading {
@@ -323,206 +541,103 @@ textarea {
         margin: 0;
         padding: 0.5rem 0;
     }
+
+    .features, .benefits {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-form {
+        padding: 0 0.5rem;
+        width: 100%;
+    }
+
+    .cta-button, .submit-button {
+        min-width: 100%;
+        padding: 0.8rem;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        padding: 0.8rem 0.8rem 0.8rem 3rem;
+        width: 100%;
+    }
+    
+    .form-group textarea {
+        min-height: 120px;
+    }
+    
+    .form-group {
+        margin-bottom: 1rem;
+    }
 }
 
-/* Touch-friendly improvements */
-.nav-links a, 
-.footer-links a,
-.cta-button,
-.submit-button {
-    padding: 0.75rem 1rem;
-    min-height: 44px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+/* Responsive Design - Tablet */
+@media (min-width: 481px) and (max-width: 768px) {
+    .contact-form {
+        width: 90%;
+        margin: 0 auto;
+    }
+    
+    .form-group input,
+    .form-group textarea {
+        font-size: 16px;
+    }
+    
+    .submit-button {
+        width: auto;
+        min-width: 200px;
+    }
 }
 
-/* Improved spacing for mobile */
-p {
-    margin-bottom: 1rem;
-    padding: 0 0.5rem;
+/* Additional mobile fixes */
+@media (max-width: 480px) {
+    .mobile-menu-button {
+        padding: 8px;
+    }
+    
+    .logo {
+        font-size: 1.3rem;
+    }
+    
+    .nav-container {
+        padding: 0.6rem 1rem;
+    }
+    
+    /* Fix for contact form icons */
+    .form-group i {
+        top: 1.2rem;
+        transform: none;
+    }
+    
+    .form-group textarea + i {
+        top: 1.2rem;
+    }
 }
 
-/* Better form layout for mobile */
-.form-group {
-    margin-bottom: 1rem;
-}
-
-/* Improved grid layouts */
-.features {
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-}
-
-.benefits {
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-}
-
-/* Icon Styling */
-.feature-icon i,
-.benefit-icon i {
-    font-size: 2.5rem;
-    color: var(--primary-color);
-    transition: transform 0.3s ease, color 0.3s ease;
-}
-
-.feature:hover .feature-icon i,
-.benefit:hover .benefit-icon i {
-    transform: scale(1.1);
-    color: var(--secondary-color);
-}
-
-/* Material UI-inspired animations */
-.nav-links a i,
-.cta-button i,
-.submit-button i {
-    margin-right: 0.5rem;
-    transition: transform 0.3s ease;
-}
-
-.nav-links a:hover i,
-.cta-button:hover i,
-.submit-button:hover i {
-    transform: translateX(3px);
-}
-
-/* Form input icons */
-.form-group {
-    position: relative;
-}
-
-.form-group i {
-    position: absolute;
-    left: 1rem;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #666;
-    transition: color 0.3s ease;
-}
-
-.form-group textarea + i {
-    top: 1.5rem;
-    transform: none;
-}
-
-.form-group input,
-.form-group textarea {
-    padding-left: 3rem;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
+/* Improved accessibility focus states */
+.mobile-menu-button:focus,
+.nav-links a:focus,
 .form-group input:focus,
-.form-group textarea:focus {
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 2px rgba(0, 102, 204, 0.2);
-    outline: none;
+.form-group textarea:focus,
+.cta-button:focus,
+.submit-button:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
 }
 
-.form-group input:focus + i,
-.form-group textarea:focus + i {
-    color: var(--primary-color);
-}
-
-/* Mobile menu improvements */
-.mobile-menu-button {
-    transition: transform 0.3s ease;
-}
-
-.mobile-menu-button:hover {
-    transform: scale(1.1);
-}
-
-.mobile-menu-button i {
-    font-size: 1.5rem;
-}
-
-/* Material UI-inspired button styles */
-.cta-button, .submit-button {
-    position: relative;
-    overflow: hidden;
-    transition: all 0.3s ease;
-}
-
-.cta-button:after, .submit-button:after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    transition: width 0.6s ease, height 0.6s ease;
-}
-
-.cta-button:hover:after, .submit-button:hover:after {
-    width: 300px;
-    height: 300px;
-}
-
-/* Section heading icons */
-section h2 i {
-    margin-right: 0.5rem;
-    color: var(--primary-color);
-    transition: transform 0.3s ease;
-}
-
-section:hover h2 i {
-    transform: scale(1.1);
-}
-
-/* Footer icon improvements */
-.footer-links a i {
-    margin-right: 0.5rem;
-    transition: transform 0.3s ease;
-}
-
-.footer-links a:hover i {
-    transform: translateY(-2px);
-}
-
-/* Mobile menu animation */
-.nav-links {
-    transition: transform 0.3s ease, opacity 0.3s ease;
-}
-
-@media (max-width: 768px) {
-    .nav-links {
-        transform: translateY(-10px);
-        opacity: 0;
-        pointer-events: none;
+/* Ensure form is usable on small screens */
+@media (max-width: 480px) {
+    /* Fix for input fields on smaller mobile devices */
+    input, textarea, button {
+        -webkit-appearance: none;
+        border-radius: 4px;
+        font-size: 16px; /* Prevents iOS zoom on focus */
     }
-
-    .nav-links.active {
-        transform: translateY(0);
-        opacity: 1;
-        pointer-events: all;
+    
+    /* Improve tap targets */
+    .nav-links a,
+    .cta-button,
+    .submit-button {
+        min-height: 44px;
     }
-
-    .nav-links a {
-        padding: 1rem;
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-    }
-
-    .nav-links a i {
-        width: 1.5rem;
-        text-align: center;
-    }
-}
-
-/* Smooth scroll behavior */
-html {
-    scroll-behavior: smooth;
-}
-
-/* Material UI-inspired card hover effects */
-.feature, .benefit {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.feature:hover, .benefit:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 } 
