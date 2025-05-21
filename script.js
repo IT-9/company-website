@@ -12,6 +12,40 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
+// Logo click functionality
+const logo = document.querySelector('.logo');
+if (logo) {
+    // Function to handle logo activation
+    function handleLogoActivation() {
+        // Check if we're on the main page or privacy page
+        if (window.location.pathname.includes('privacy.html')) {
+            // On privacy page, go back to main page
+            window.location.href = 'index.html';
+        } else {
+            // On main page, scroll to top
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+    }
+    
+    // Mouse click handler
+    logo.addEventListener('click', handleLogoActivation);
+    
+    // Keyboard handler (for accessibility)
+    logo.addEventListener('keydown', function(e) {
+        // Activate on Enter or Space key
+        if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
+            e.preventDefault(); // Prevent page scroll on space
+            handleLogoActivation();
+        }
+    });
+    
+    // Add cursor pointer to indicate it's clickable
+    logo.style.cursor = 'pointer';
+}
+
 // Mobile menu functionality
 const mobileMenuButton = document.querySelector('.mobile-menu-button');
 const navLinks = document.querySelector('.nav-links');

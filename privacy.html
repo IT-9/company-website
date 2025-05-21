@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         .privacy-content {
             max-width: 800px;
@@ -38,11 +39,16 @@
 <body>
     <header class="header">
         <nav class="nav-container">
-            <div class="logo">IT9</div>
-            <ul class="nav-links">
-                <li><a href="index.html#about">About</a></li>
-                <li><a href="index.html#product">Product</a></li>
-                <li><a href="index.html#contact">Contact</a></li>
+            <div class="logo" tabindex="0" role="button" aria-label="Logo - Click to return to home page">
+                <img src="img/logo.jpeg" alt="IT9 Logo" class="logo-image">
+            </div>
+            <button class="mobile-menu-button" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
+                <i class="fas fa-bars" aria-hidden="true"></i>
+            </button>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html#about"><i class="fas fa-info-circle" aria-hidden="true"></i> About</a></li>
+                <li><a href="index.html#product"><i class="fas fa-box" aria-hidden="true"></i> Product</a></li>
+                <li><a href="index.html#contact"><i class="fas fa-envelope" aria-hidden="true"></i> Contact</a></li>
             </ul>
         </nav>
     </header>
@@ -109,11 +115,16 @@
 
     <footer class="footer">
         <div class="footer-content">
-            <p>© IT9 Ltd. All Rights Reserved.</p>
-            <p>Registered in England & Wales.</p>
-            <div class="footer-links">
-                <a href="privacy.html">Privacy Policy</a>
-                <a href="index.html#contact">Contact</a>
+            <div class="footer-logo">
+                <img src="img/logo.jpeg" alt="IT9 Logo" class="footer-logo-image">
+            </div>
+            <div class="footer-info">
+                <p><i class="fas fa-copyright" aria-hidden="true"></i> IT9 Ltd. All Rights Reserved.</p>
+                <p>Registered in England & Wales.</p>
+                <div class="footer-links">
+                    <a href="privacy.html"><i class="fas fa-shield-alt" aria-hidden="true"></i> Privacy Policy</a>
+                    <a href="index.html#contact"><i class="fas fa-envelope" aria-hidden="true"></i> Contact</a>
+                </div>
             </div>
         </div>
     </footer>

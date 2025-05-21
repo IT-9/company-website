@@ -13,7 +13,9 @@
 <body>
     <header class="header">
         <nav class="nav-container">
-            <div class="logo">IT9</div>
+            <div class="logo" tabindex="0" role="button" aria-label="Logo - Click to go to top">
+                <img src="img/logo.jpeg" alt="IT9 Logo" class="logo-image">
+            </div>
             <button class="mobile-menu-button" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
                 <i class="fas fa-bars" aria-hidden="true"></i>
             </button>
@@ -34,31 +36,46 @@
                     <i class="fas fa-play-circle" aria-hidden="true"></i> Request a Demo
                 </button>
             </div>
+            <div class="hero-image">
+                <img src="img/img2.jpeg" alt="Bus interior view" class="hero-img">
+            </div>
         </section>
 
         <section id="about" class="about">
             <h2><i class="fas fa-road" aria-hidden="true"></i> Driving Better Services for Operators and Passengers</h2>
-            <p>At IT9, we're on a mission to improve the operations of bus services for the benefit of passengers — by providing affordable, all-in-one solutions that simplify compliance, enhance the passenger experience, and reduce operational complexity.</p>
-            <p>We know the industry firsthand, having run bus routes across the UK and Asia. From rural services to city routes, we understand the realities operators face — and we're building tools that help.</p>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>At IT9, we're on a mission to improve the operations of bus services for the benefit of passengers — by providing affordable, all-in-one solutions that simplify compliance, enhance the passenger experience, and reduce operational complexity.</p>
+                    <p>We know the industry firsthand, having run bus routes across the UK and Asia. From rural services to city routes, we understand the realities operators face — and we're building tools that help.</p>
+                </div>
+                <div class="about-image">
+                    <img src="img/img3.jpeg" alt="Bus service in operation" class="about-img">
+                </div>
+            </div>
         </section>
 
         <section id="product" class="product">
             <h2><i class="fas fa-star" aria-hidden="true"></i> Meet Alpha – Built for Compliance. Designed for Growth.</h2>
-            <div class="features">
-                <div class="feature">
-                    <span class="feature-icon"><i class="fas fa-check-circle" aria-hidden="true"></i></span>
-                    <h3>PSVAIR Compliant</h3>
-                    <p>Fully compliant with latest UK regulations</p>
+            <div class="product-showcase">
+                <div class="product-image">
+                    <img src="img/img1.jpeg" alt="Alpha product - LED display in bus" class="product-img">
                 </div>
-                <div class="feature">
-                    <span class="feature-icon"><i class="fas fa-volume-up" aria-hidden="true"></i></span>
-                    <h3>Clear Communication</h3>
-                    <p>High-quality audio & visual announcements</p>
-                </div>
-                <div class="feature">
-                    <span class="feature-icon"><i class="fas fa-cogs" aria-hidden="true"></i></span>
-                    <h3>Easy Integration</h3>
-                    <p>Simple installation and reliable performance</p>
+                <div class="features">
+                    <div class="feature">
+                        <span class="feature-icon"><i class="fas fa-check-circle" aria-hidden="true"></i></span>
+                        <h3>PSVAIR Compliant</h3>
+                        <p>Fully compliant with latest UK regulations</p>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-icon"><i class="fas fa-volume-up" aria-hidden="true"></i></span>
+                        <h3>Clear Communication</h3>
+                        <p>High-quality audio & visual announcements</p>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-icon"><i class="fas fa-cogs" aria-hidden="true"></i></span>
+                        <h3>Easy Integration</h3>
+                        <p>Simple installation and reliable performance</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -118,11 +135,16 @@
 
     <footer class="footer">
         <div class="footer-content">
-            <p><i class="fas fa-copyright" aria-hidden="true"></i> IT9 Ltd. All Rights Reserved.</p>
-            <p>Registered in England & Wales.</p>
-            <div class="footer-links">
-                <a href="privacy.html"><i class="fas fa-shield-alt" aria-hidden="true"></i> Privacy Policy</a>
-                <a href="#contact"><i class="fas fa-envelope" aria-hidden="true"></i> Contact</a>
+            <div class="footer-logo">
+                <img src="img/logo.jpeg" alt="IT9 Logo" class="footer-logo-image">
+            </div>
+            <div class="footer-info">
+                <p><i class="fas fa-copyright" aria-hidden="true"></i> IT9 Ltd. All Rights Reserved.</p>
+                <p>Registered in England & Wales.</p>
+                <div class="footer-links">
+                    <a href="privacy.html"><i class="fas fa-shield-alt" aria-hidden="true"></i> Privacy Policy</a>
+                    <a href="#contact"><i class="fas fa-envelope" aria-hidden="true"></i> Contact</a>
+                </div>
             </div>
         </div>
     </footer>
