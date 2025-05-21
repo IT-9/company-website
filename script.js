@@ -155,7 +155,7 @@ if (contactForm) {
             return;
         }
 
-        const googleFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSfOhWlHN_5O17UtK0VXvLjOVjZV6EGlaPmGt-vtBgsxRXdtCg/formResponse';
+        const googleFormUrl = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSfOhWlHN_5O17UtK0VXvLjOVjZV6EGlaPmGt-vtBgsxRXdtCg/formResponse'
         
         const formData = new FormData();
         formData.append('entry.1237418632', contactForm.name.value); 
