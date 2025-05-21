@@ -12,78 +12,49 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
+// Mobile menu functionality
+const mobileMenuButton = document.querySelector('.mobile-menu-button');
+const navLinks = document.querySelector('.nav-links');
+
+mobileMenuButton.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+    mobileMenuButton.setAttribute('aria-expanded', 
+        mobileMenuButton.getAttribute('aria-expanded') === 'true' ? 'false' : 'true'
+    );
+});
+
+// Close mobile menu when clicking outside
+document.addEventListener('click', (e) => {
+    if (!e.target.closest('.nav-container')) {
+        navLinks.classList.remove('active');
+        mobileMenuButton.setAttribute('aria-expanded', 'false');
+    }
+});
+
+// Close mobile menu when clicking a link
+document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+        mobileMenuButton.setAttribute('aria-expanded', 'false');
+    });
+});
+
 // Function to scroll to contact section
 function scrollToContact() {
     const contactSection = document.querySelector('#contact');
-    if (contactSection) {
-        contactSection.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-        });
-    }
+    contactSection.scrollIntoView({ behavior: 'smooth' });
 }
 
 // Handle form submission
-document.getElementById('contactForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    // Replace this URL with your actual Google Form URL
-    const googleFormUrl = 'YOUR_GOOGLE_FORM_URL';
-    
-    // Get form data
-    const formData = new FormData(this);
-    const formDataObj = {};
-    formData.forEach((value, key) => {
-        formDataObj[key] = value;
+const contactForm = document.getElementById('contactForm');
+if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        // Add your form submission logic here
+        alert('Thank you for your interest! We will contact you soon.');
+        contactForm.reset();
     });
-    
-    // Create a hidden form to submit to Google Forms
-    const hiddenForm = document.createElement('form');
-    hiddenForm.method = 'POST';
-    hiddenForm.action = googleFormUrl;
-    hiddenForm.target = '_blank';
-    hiddenForm.style.display = 'none';
-    
-    // Add form fields to the hidden form
-    for (const [key, value] of Object.entries(formDataObj)) {
-        const input = document.createElement('input');
-        input.type = 'hidden';
-        input.name = key;
-        input.value = value;
-        hiddenForm.appendChild(input);
-    }
-    
-    // Add the form to the document and submit it
-    document.body.appendChild(hiddenForm);
-    hiddenForm.submit();
-    
-    // Show success message
-    const successMessage = document.createElement('div');
-    successMessage.className = 'success-message';
-    successMessage.textContent = 'Thank you for your interest! We will get back to you within 1 business day.';
-    successMessage.style.cssText = `
-        position: fixed;
-        top: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        background: #4CAF50;
-        color: white;
-        padding: 1rem 2rem;
-        border-radius: 4px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        z-index: 1000;
-    `;
-    
-    document.body.appendChild(successMessage);
-    
-    // Remove success message after 5 seconds
-    setTimeout(() => {
-        successMessage.remove();
-    }, 5000);
-    
-    // Reset the form
-    this.reset();
-});
+}
 
 // Add scroll-based header styling
 window.addEventListener('scroll', function() {
