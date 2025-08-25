@@ -201,6 +201,213 @@ section h2 {
     display: block;
 }
 
+/* Careers Section */
+.careers {
+    text-align: center;
+}
+
+.careers-content {
+    max-width: var(--max-width);
+    margin: 0 auto;
+}
+
+.careers-intro {
+    margin-bottom: 3rem;
+}
+
+.careers-intro p {
+    font-size: 1.1rem;
+    color: var(--text-color);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.job-listings {
+    margin-bottom: 3rem;
+}
+
+.job-card {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.job-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.job-header {
+    border-bottom: 2px solid var(--light-gray);
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.job-header h3 {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.job-type {
+    background: var(--primary-color);
+    color: var(--white);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.job-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: var(--light-gray);
+    border-radius: 8px;
+}
+
+.job-details > div {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.job-details i {
+    color: var(--primary-color);
+    width: 1.2rem;
+    text-align: center;
+}
+
+.job-description {
+    margin-bottom: 1.5rem;
+}
+
+.job-description p {
+    margin-bottom: 1rem;
+    padding: 0;
+}
+
+.job-highlights,
+.job-requirements,
+.job-benefits {
+    margin-bottom: 1.5rem;
+}
+
+.job-highlights h4,
+.job-requirements h4,
+.job-benefits h4 {
+    color: var(--primary-color);
+    font-size: 1.1rem;
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.job-highlights ul,
+.job-requirements ul,
+.job-benefits ul {
+    list-style: none;
+    padding: 0;
+}
+
+.job-highlights li,
+.job-requirements li,
+.job-benefits li {
+    padding: 0.4rem 0;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.job-highlights li:before,
+.job-requirements li:before,
+.job-benefits li:before {
+    content: "✓";
+    color: var(--primary-color);
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+}
+
+.job-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--light-gray);
+}
+
+.job-pdf-link {
+    background: var(--secondary-color);
+    color: var(--white);
+    text-decoration: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    justify-content: center;
+    max-width: 300px;
+}
+
+.job-pdf-link:hover {
+    background: var(--primary-darker);
+    transform: translateY(-2px);
+}
+
+.job-application-info {
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    background: var(--light-gray);
+    border-radius: 8px;
+    text-align: center;
+}
+
+.job-application-info p {
+    margin-bottom: 0.8rem;
+    padding: 0;
+}
+
+.job-application-info p:last-child {
+    margin-bottom: 0;
+    color: var(--text-color);
+    opacity: 0.8;
+}
+
+.email-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.email-link:hover {
+    color: var(--primary-darker);
+    text-decoration: underline;
+}
+
+.careers-footer {
+    text-align: center;
+    padding: 2rem;
+    background: var(--light-gray);
+    border-radius: 8px;
+    margin-top: 2rem;
+}
+
+.careers-footer p {
+    font-style: italic;
+    color: var(--text-color);
+    margin: 0;
+}
+
 /* Contact Form */
 .contact {
     text-align: center;
@@ -630,6 +837,26 @@ html {
     .about-content, .product-showcase {
         flex-direction: column;
         align-items: center;
+    }
+    
+    .job-card {
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .job-details {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+    }
+    
+    .job-actions {
+        justify-content: center;
+    }
+    
+    .job-pdf-link {
+        width: 100%;
+        max-width: none;
+        justify-content: center;
     }
     
     .hero-image, .about-image, .product-image {
