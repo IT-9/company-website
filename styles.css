@@ -321,6 +321,126 @@ section h2 {
     display: block;
 }
 
+/* Catalogue Section */
+.catalogue {
+    text-align: center;
+}
+
+.catalogue-content {
+    max-width: var(--max-width);
+    margin: 0 auto;
+}
+
+.catalogue-intro {
+    margin-bottom: 3rem;
+}
+
+.catalogue-intro p {
+    font-size: 1.1rem;
+    color: var(--text-color);
+    max-width: 900px;
+    margin: 0 auto;
+    line-height: 1.8;
+}
+
+.catalogue-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    justify-items: center;
+}
+
+.catalogue-card {
+    background: var(--white);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    max-width: 500px;
+    width: 100%;
+}
+
+.catalogue-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.catalogue-image {
+    background: var(--light-gray);
+    padding: 1rem;
+    cursor: pointer;
+}
+
+.catalogue-image a {
+    display: block;
+}
+
+.catalogue-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.catalogue-image:hover .catalogue-img {
+    transform: scale(1.02);
+}
+
+.catalogue-info {
+    padding: 1.5rem;
+    text-align: left;
+}
+
+.catalogue-info h3 {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    margin-bottom: 0.25rem;
+}
+
+.catalogue-subtitle {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.catalogue-desc {
+    font-size: 0.95rem;
+    color: var(--text-color);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.catalogue-actions {
+    display: flex;
+    justify-content: center;
+}
+
+.catalogue-pdf-link {
+    background: var(--primary-color);
+    color: var(--white);
+    text-decoration: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    width: 100%;
+    justify-content: center;
+}
+
+.catalogue-pdf-link:hover {
+    background: var(--primary-darker);
+    transform: translateY(-2px);
+}
+
+.catalogue-pdf-link i {
+    font-size: 1.1rem;
+}
+
 /* Careers Section */
 .careers {
     text-align: center;
@@ -674,6 +794,35 @@ section h2 {
     gap: 0.5rem;
 }
 
+.footer-contact {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.footer-contact a {
+    color: var(--white);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.footer-contact a:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.footer-contact a i {
+    font-size: 1rem;
+}
+
 .footer-links {
     display: flex;
     gap: 1rem;
@@ -959,6 +1108,18 @@ html {
         align-items: center;
     }
     
+    .catalogue-items {
+        grid-template-columns: 1fr;
+    }
+    
+    .catalogue-card {
+        max-width: 100%;
+    }
+    
+    .catalogue-info {
+        text-align: center;
+    }
+    
     .job-card {
         padding: 1.5rem;
         margin-bottom: 1.5rem;
@@ -1026,6 +1187,15 @@ html {
     
     .footer-logo {
         margin-bottom: 1rem;
+    }
+    
+    .footer-contact {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    
+    .footer-contact a {
+        justify-content: center;
     }
 }
 
