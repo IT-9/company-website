@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,22 +20,23 @@
     <link rel="apple-touch-icon" sizes="144x144" href="favicon/apple-icon-144x144.png">
     <link rel="apple-touch-icon" sizes="152x152" href="favicon/apple-icon-152x152.png">
     <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-icon-180x180.png">
-    
-    <link rel="icon" type="image/png" sizes="192x192"  href="favicon/android-icon-192x192.png">
+
+    <link rel="icon" type="image/png" sizes="192x192" href="favicon/android-icon-192x192.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="96x96" href="favicon/favicon-96x96.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
-    
+
     <link rel="manifest" href="favicon/manifest.json">
-    
+
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="favicon/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
-    
+
     <!-- Standard additions based on available files -->
     <link rel="shortcut icon" href="favicon/favicon.ico">
     <meta name="msapplication-config" content="favicon/browserconfig.xml">
 </head>
+
 <body>
     <header class="header">
         <nav class="nav-container">
@@ -57,22 +59,74 @@
         <section class="hero">
             <div class="hero-content">
                 <h1>Smarter Bus Operations, One Stop at a Time</h1>
-                <p class="subheading">Introducing Alpha – our audio-visual announcement system that helps operators meet PSVAIR requirements while laying the foundation for a smarter, integrated bus operation platform.</p>
+                <p class="subheading">Introducing Alpha – our audio-visual announcement system that helps operators meet
+                    PSVAIR requirements while laying the foundation for a smarter, integrated bus operation platform.
+                </p>
                 <button class="cta-button" onclick="scrollToContact()" aria-label="Request a Demo">
                     <i class="fas fa-play-circle" aria-hidden="true"></i> Request a Demo
                 </button>
             </div>
-            <div class="hero-image">
-                <img src="img/img2.jpeg" alt="Bus interior view" class="hero-img">
+            <div class="hero-slider">
+                <div class="slider-container">
+                    <div class="slider-track">
+                        <div class="slide active">
+                            <img src="img/img_sample_01.png"
+                                alt="Alpha display showing route information with next stop announcement"
+                                class="slide-img" data-lightbox="hero-gallery">
+                        </div>
+                        <div class="slide">
+                            <img src="img/img_sample_02.png"
+                                alt="Alpha display showing The Mill next stop with bus interior" class="slide-img"
+                                data-lightbox="hero-gallery">
+                        </div>
+                        <div class="slide">
+                            <img src="img/img_sample_03.png"
+                                alt="Alpha display with Bus Stopping indicator and diversion notice" class="slide-img"
+                                data-lightbox="hero-gallery">
+                        </div>
+                    </div>
+                    <button class="slider-btn slider-btn-prev" aria-label="Previous image">
+                        <i class="fas fa-chevron-left" aria-hidden="true"></i>
+                    </button>
+                    <button class="slider-btn slider-btn-next" aria-label="Next image">
+                        <i class="fas fa-chevron-right" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <div class="slider-dots">
+                    <button class="slider-dot active" aria-label="Go to slide 1" data-slide="0"></button>
+                    <button class="slider-dot" aria-label="Go to slide 2" data-slide="1"></button>
+                    <button class="slider-dot" aria-label="Go to slide 3" data-slide="2"></button>
+                </div>
             </div>
         </section>
+
+        <!-- Lightbox Modal -->
+        <div class="lightbox" id="lightbox" aria-hidden="true">
+            <button class="lightbox-close" aria-label="Close lightbox">
+                <i class="fas fa-times" aria-hidden="true"></i>
+            </button>
+            <button class="lightbox-btn lightbox-btn-prev" aria-label="Previous image">
+                <i class="fas fa-chevron-left" aria-hidden="true"></i>
+            </button>
+            <div class="lightbox-content">
+                <img src="" alt="" class="lightbox-img" id="lightbox-img">
+            </div>
+            <button class="lightbox-btn lightbox-btn-next" aria-label="Next image">
+                <i class="fas fa-chevron-right" aria-hidden="true"></i>
+            </button>
+            <div class="lightbox-counter" id="lightbox-counter"></div>
+        </div>
 
         <section id="about" class="about">
             <h2><i class="fas fa-road" aria-hidden="true"></i> Driving Better Services for Operators and Passengers</h2>
             <div class="about-content">
                 <div class="about-text">
-                    <p>At IT9, we're on a mission to improve the operations of bus services for the benefit of passengers — by providing affordable, all-in-one solutions that simplify compliance, enhance the passenger experience, and reduce operational complexity.</p>
-                    <p>We know the industry firsthand, having run bus routes across the UK and Asia. From rural services to city routes, we understand the realities operators face — and we're building tools that help.</p>
+                    <p>At IT9, we're on a mission to improve the operations of bus services for the benefit of
+                        passengers — by providing affordable, all-in-one solutions that simplify compliance, enhance the
+                        passenger experience, and reduce operational complexity.</p>
+                    <p>We know the industry firsthand, having run bus routes across the UK and Asia. From rural services
+                        to city routes, we understand the realities operators face — and we're building tools that help.
+                    </p>
                 </div>
                 <div class="about-image">
                     <img src="img/img3.jpeg" alt="Bus service in operation" class="about-img">
@@ -81,7 +135,8 @@
         </section>
 
         <section id="product" class="product">
-            <h2><i class="fas fa-star" aria-hidden="true"></i> Meet Alpha – Our latest audio-visual announcement system. Built for Compliance. Designed for Growth.</h2>
+            <h2><i class="fas fa-star" aria-hidden="true"></i> Meet Alpha – Our latest audio-visual announcement system.
+                Built for Compliance. Designed for Growth.</h2>
             <div class="product-showcase">
                 <div class="product-image">
                     <img src="img/img1.jpeg" alt="Alpha product - LED display in bus" class="product-img">
@@ -132,9 +187,11 @@
             <h2><i class="fas fa-briefcase" aria-hidden="true"></i> Join Our Team</h2>
             <div class="careers-content">
                 <div class="careers-intro">
-                    <p>We're building the future of public transport technology, and we need passionate people to join us on this journey. If you're looking for an opportunity to make a real impact while working with cutting-edge technology, we'd love to hear from you.</p>
+                    <p>We're building the future of public transport technology, and we need passionate people to join
+                        us on this journey. If you're looking for an opportunity to make a real impact while working
+                        with cutting-edge technology, we'd love to hear from you.</p>
                 </div>
-                
+
                 <div class="job-listings">
                     <div class="job-card">
                         <div class="job-header">
@@ -157,8 +214,13 @@
                         </div>
                         <div class="job-description">
                             <p>🚀 <strong>Join Our Growing Team at IT9 Ltd!</strong></p>
-                            <p>We're hiring an Assistant Technical Officer to support the installation of our onboard hardware systems for public buses across the UK. Based in the East Midlands, this full-time, entry-level role is ideal for someone practical, hands-on, and eager to learn.</p>
-                            <p>No experience? No problem — we provide full training, support, and clear procedures. You'll gain real-world technical skills, travel to customer sites, and work closely with our small, friendly start-up team.</p>
+                            <p>We're hiring an Assistant Technical Officer to support the installation of our onboard
+                                hardware systems for public buses across the UK. Based in the East Midlands, this
+                                full-time, entry-level role is ideal for someone practical, hands-on, and eager to
+                                learn.</p>
+                            <p>No experience? No problem — we provide full training, support, and clear procedures.
+                                You'll gain real-world technical skills, travel to customer sites, and work closely with
+                                our small, friendly start-up team.</p>
                         </div>
                         <div class="job-highlights">
                             <h4>Key Responsibilities</h4>
@@ -188,50 +250,62 @@
                                 <li>🛠 Full training provided - no experience required</li>
                                 <li>🌍 Short-term visa holders welcome</li>
                                 <li>Friendly, supportive team environment</li>
-                                <li>Opportunities to progress into product development or software/hardware engineering</li>
+                                <li>Opportunities to progress into product development or software/hardware engineering
+                                </li>
                                 <li>Help with accommodation for candidates relocating</li>
                             </ul>
                         </div>
                         <div class="job-actions">
-                            <a href="assets/IT9 - Assistant Technical Officer - Job Description JD.pdf" class="job-pdf-link" target="_blank" rel="noopener">
+                            <a href="assets/IT9 - Assistant Technical Officer - Job Description JD.pdf"
+                                class="job-pdf-link" target="_blank" rel="noopener">
                                 <i class="fas fa-file-pdf" aria-hidden="true"></i> View Full Job Description (PDF)
                             </a>
                         </div>
                         <div class="job-application-info">
-                            <p><strong>How to Apply:</strong> Please send your CV and a short cover letter explaining why this opportunity interests you to: <a href="mailto:hello@it9.uk" class="email-link">hello@it9.uk</a></p>
-                            <p><em>We look forward to hearing from practical, positive people who want to grow with us.</em></p>
+                            <p><strong>How to Apply:</strong> Please send your CV and a short cover letter explaining
+                                why this opportunity interests you to: <a href="mailto:hello@it9.uk"
+                                    class="email-link">hello@it9.uk</a></p>
+                            <p><em>We look forward to hearing from practical, positive people who want to grow with
+                                    us.</em></p>
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="careers-footer">
-                    <p>Don't see a role that fits? We're always interested in hearing from talented individuals who share our passion for improving public transport. Feel free to reach out and tell us about yourself!</p>
+                    <p>Don't see a role that fits? We're always interested in hearing from talented individuals who
+                        share our passion for improving public transport. Feel free to reach out and tell us about
+                        yourself!</p>
                 </div>
             </div>
         </section>
 
         <section id="contact" class="contact">
             <h2><i class="fas fa-envelope-open-text" aria-hidden="true"></i> Interested in Seeing Alpha in Action?</h2>
-            <p>We're now offering early demos and meetings for UK bus and coach operators. Let's discuss how Alpha can support your routes — and hear what features you'd love to see next.</p>
+            <p>We're now offering early demos and meetings for UK bus and coach operators. Let's discuss how Alpha can
+                support your routes — and hear what features you'd love to see next.</p>
             <form id="contactForm" class="contact-form">
                 <div class="form-group">
                     <input type="text" id="name" name="name" required placeholder="Your Name" aria-label="Your Name">
                     <i class="fas fa-user" aria-hidden="true"></i>
                 </div>
                 <div class="form-group">
-                    <input type="text" id="company" name="company" required placeholder="Company Name" aria-label="Company Name">
+                    <input type="text" id="company" name="company" required placeholder="Company Name"
+                        aria-label="Company Name">
                     <i class="fas fa-building" aria-hidden="true"></i>
                 </div>
                 <div class="form-group">
-                    <input type="email" id="email" name="email" required placeholder="Email Address" aria-label="Email Address">
+                    <input type="email" id="email" name="email" required placeholder="Email Address"
+                        aria-label="Email Address">
                     <i class="fas fa-envelope" aria-hidden="true"></i>
                 </div>
                 <div class="form-group">
-                    <input type="tel" id="phone" name="phone" required placeholder="Phone Number" aria-label="Phone Number">
+                    <input type="tel" id="phone" name="phone" required placeholder="Phone Number"
+                        aria-label="Phone Number">
                     <i class="fas fa-phone" aria-hidden="true"></i>
                 </div>
                 <div class="form-group">
-                    <textarea id="message" name="message" required placeholder="Your Message" aria-label="Your Message"></textarea>
+                    <textarea id="message" name="message" required placeholder="Your Message"
+                        aria-label="Your Message"></textarea>
                     <i class="fas fa-comment" aria-hidden="true"></i>
                 </div>
                 <button type="submit" class="submit-button">
@@ -259,4 +333,5 @@
 
     <script src="script.js"></script>
 </body>
-</html> 
+
+</html>

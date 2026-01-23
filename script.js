@@ -210,4 +210,86 @@ function checkViewportSize() {
 window.addEventListener('resize', checkViewportSize);
 
 // Run once on page load
-checkViewportSize(); 
+checkViewportSize();
+
+// Hero Slider Functionality
+const heroSlider = {
+    currentSlide: 0,
+    slides: document.querySelectorAll('.slide'),
+    dots: document.querySelectorAll('.slider-dot'),
+    prevBtn: document.querySelector('.slider-btn-prev'),
+    nextBtn: document.querySelector('.slider-btn-next'),
+    autoPlayInterval: null,
+    autoPlayDelay: 5000,
+
+    init: function() {
+        if (!this.slides.length) return;
+        this.prevBtn?.addEventListener('click', () => this.prevSlide());
+        this.nextBtn?.addEventListener('click', () => this.nextSlide());
+        this.dots.forEach((dot, index) => { dot.addEventListener('click', () => this.goToSlide(index)); });
+        this.slides.forEach(slide => { slide.addEventListener('click', () => lightbox.open(this.currentSlide)); });
+        this.startAutoPlay();
+        document.querySelector('.hero-slider')?.addEventListener('mouseenter', () => this.stopAutoPlay());
+        document.querySelector('.hero-slider')?.addEventListener('mouseleave', () => this.startAutoPlay());
+    },
+
+    goToSlide: function(index) {
+        this.slides[this.currentSlide]?.classList.remove('active');
+        this.dots[this.currentSlide]?.classList.remove('active');
+        this.currentSlide = (index + this.slides.length) % this.slides.length;
+        this.slides[this.currentSlide]?.classList.add('active');
+        this.dots[this.currentSlide]?.classList.add('active');
+    },
+
+    nextSlide: function() { this.goToSlide(this.currentSlide + 1); },
+    prevSlide: function() { this.goToSlide(this.currentSlide - 1); },
+    startAutoPlay: function() { this.stopAutoPlay(); this.autoPlayInterval = setInterval(() => this.nextSlide(), this.autoPlayDelay); },
+    stopAutoPlay: function() { if (this.autoPlayInterval) { clearInterval(this.autoPlayInterval); this.autoPlayInterval = null; } }
+};
+
+// Lightbox Functionality
+const lightbox = {
+    element: document.getElementById('lightbox'),
+    img: document.getElementById('lightbox-img'),
+    counter: document.getElementById('lightbox-counter'),
+    prevBtn: document.querySelector('.lightbox-btn-prev'),
+    nextBtn: document.querySelector('.lightbox-btn-next'),
+    closeBtn: document.querySelector('.lightbox-close'),
+    images: [],
+    currentIndex: 0,
+
+    init: function() {
+        if (!this.element) return;
+        this.images = Array.from(document.querySelectorAll('.slide-img')).map(img => ({ src: img.src, alt: img.alt }));
+        this.closeBtn?.addEventListener('click', () => this.close());
+        this.prevBtn?.addEventListener('click', () => this.prev());
+        this.nextBtn?.addEventListener('click', () => this.next());
+        this.element.addEventListener('click', (e) => { if (e.target === this.element) this.close(); });
+        document.addEventListener('keydown', (e) => { if (!this.element.classList.contains('active')) return; if (e.key === 'Escape') this.close(); if (e.key === 'ArrowLeft') this.prev(); if (e.key === 'ArrowRight') this.next(); });
+    },
+
+    open: function(index) {
+        this.currentIndex = index;
+        this.updateImage();
+        this.element.classList.add('active');
+        this.element.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+    },
+
+    close: function() {
+        this.element.classList.remove('active');
+        this.element.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+    },
+
+    updateImage: function() {
+        const image = this.images[this.currentIndex];
+        if (image) { this.img.src = image.src; this.img.alt = image.alt; this.counter.textContent = `${this.currentIndex + 1} / ${this.images.length}`; }
+    },
+
+    next: function() { this.currentIndex = (this.currentIndex + 1) % this.images.length; this.updateImage(); },
+    prev: function() { this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length; this.updateImage(); }
+};
+
+heroSlider.init();
+lightbox.init(); 
