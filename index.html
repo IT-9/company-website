@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css">
 
     <link rel="apple-touch-icon" sizes="57x57" href="favicon/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="favicon/apple-icon-60x60.png">
@@ -70,19 +71,30 @@
                 <div class="slider-container">
                     <div class="slider-track">
                         <div class="slide active">
-                            <img src="img/img_sample_01.png"
-                                alt="Alpha display showing route information with next stop announcement"
-                                class="slide-img" data-lightbox="hero-gallery">
+                            <a href="img/img_sample_01.png" class="glightbox" data-gallery="hero-gallery"
+                                data-title="Alpha Display - Route Information"
+                                data-description="Next stop announcement with route progress indicator">
+                                <img src="img/img_sample_01.png"
+                                    alt="Alpha display showing route information with next stop announcement"
+                                    class="slide-img">
+                            </a>
                         </div>
                         <div class="slide">
-                            <img src="img/img_sample_02.png"
-                                alt="Alpha display showing The Mill next stop with bus interior" class="slide-img"
-                                data-lightbox="hero-gallery">
+                            <a href="img/img_sample_02.png" class="glightbox" data-gallery="hero-gallery"
+                                data-title="Alpha Display - The Mill"
+                                data-description="Clear next stop display visible from bus interior">
+                                <img src="img/img_sample_02.png"
+                                    alt="Alpha display showing The Mill next stop with bus interior" class="slide-img">
+                            </a>
                         </div>
                         <div class="slide">
-                            <img src="img/img_sample_03.png"
-                                alt="Alpha display with Bus Stopping indicator and diversion notice" class="slide-img"
-                                data-lightbox="hero-gallery">
+                            <a href="img/img_sample_03.png" class="glightbox" data-gallery="hero-gallery"
+                                data-title="Alpha Display - Bus Stopping"
+                                data-description="Bus stopping indicator with diversion notice support">
+                                <img src="img/img_sample_03.png"
+                                    alt="Alpha display with Bus Stopping indicator and diversion notice"
+                                    class="slide-img">
+                            </a>
                         </div>
                     </div>
                     <button class="slider-btn slider-btn-prev" aria-label="Previous image">
@@ -99,23 +111,6 @@
                 </div>
             </div>
         </section>
-
-        <!-- Lightbox Modal -->
-        <div class="lightbox" id="lightbox" aria-hidden="true">
-            <button class="lightbox-close" aria-label="Close lightbox">
-                <i class="fas fa-times" aria-hidden="true"></i>
-            </button>
-            <button class="lightbox-btn lightbox-btn-prev" aria-label="Previous image">
-                <i class="fas fa-chevron-left" aria-hidden="true"></i>
-            </button>
-            <div class="lightbox-content">
-                <img src="" alt="" class="lightbox-img" id="lightbox-img">
-            </div>
-            <button class="lightbox-btn lightbox-btn-next" aria-label="Next image">
-                <i class="fas fa-chevron-right" aria-hidden="true"></i>
-            </button>
-            <div class="lightbox-counter" id="lightbox-counter"></div>
-        </div>
 
         <section id="about" class="about">
             <h2><i class="fas fa-road" aria-hidden="true"></i> Driving Better Services for Operators and Passengers</h2>
@@ -331,6 +326,7 @@
         </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
     <script src="script.js"></script>
 </body>
 
