@@ -275,15 +275,15 @@ if (typeof GLightbox !== 'undefined') {
     const heroLightbox = GLightbox({ selector: '.glightbox', openEffect: 'zoom', closeEffect: 'fade', loop: true, touchNavigation: true, keyboardNavigation: true, closeOnOutsideClick: true });
 }
 
-// GA4 section engagement tracking
+// GA4 enhanced tracking
 (function() {
     if (typeof gtag !== 'function') return;
+
+    // -- Section engagement tracking --
     var sections = document.querySelectorAll('section[id]');
     var sectionTimers = {};
     var sectionViewed = {};
-
-    // Track when sections become visible
-    var observer = new IntersectionObserver(function(entries) {
+    var sectionObserver = new IntersectionObserver(function(entries) {
         entries.forEach(function(entry) {
             var id = entry.target.id;
             if (entry.isIntersecting) {
@@ -301,17 +301,16 @@ if (typeof GLightbox !== 'undefined') {
             }
         });
     }, { threshold: 0.3 });
+    sections.forEach(function(section) { sectionObserver.observe(section); });
 
-    sections.forEach(function(section) { observer.observe(section); });
-
-    // Track CTA button clicks
+    // -- CTA button clicks --
     document.querySelectorAll('.cta-button, .hero-cta').forEach(function(btn) {
         btn.addEventListener('click', function() {
             gtag('event', 'cta_click', { button_text: this.textContent.trim(), button_location: this.closest('section')?.id || 'unknown' });
         });
     });
 
-    // Track contact form submission
+    // -- Contact form submission --
     var form = document.getElementById('contactForm');
     if (form) {
         form.addEventListener('submit', function() {
@@ -319,7 +318,117 @@ if (typeof GLightbox !== 'undefined') {
         });
     }
 
-    // Send remaining engagement time on page leave
+    // -- 1. Scroll depth tracking (25/50/75/100%) --
+    var scrollMilestones = { 25: false, 50: false, 75: false, 100: false };
+    window.addEventListener('scroll', function() {
+        var scrollTop = window.scrollY || document.documentElement.scrollTop;
+        var docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        if (docHeight <= 0) return;
+        var percent = Math.round((scrollTop / docHeight) * 100);
+        [25, 50, 75, 100].forEach(function(milestone) {
+            if (percent >= milestone && !scrollMilestones[milestone]) {
+                scrollMilestones[milestone] = true;
+                gtag('event', 'scroll_depth', { depth_percentage: milestone, depth_pixels: Math.round(scrollTop) });
+            }
+        });
+    });
+
+    // -- 2. Contact form field drop-off tracking --
+    if (form) {
+        var fieldInteraction = {};
+        var formFields = form.querySelectorAll('input, textarea');
+        formFields.forEach(function(field) {
+            field.addEventListener('focus', function() {
+                if (!fieldInteraction[this.name]) {
+                    fieldInteraction[this.name] = { started: Date.now(), completed: false };
+                    gtag('event', 'form_field_focus', { form_name: 'contact', field_name: this.name });
+                }
+            });
+            field.addEventListener('blur', function() {
+                if (fieldInteraction[this.name] && this.value.trim().length > 0) {
+                    fieldInteraction[this.name].completed = true;
+                    gtag('event', 'form_field_complete', { form_name: 'contact', field_name: this.name });
+                }
+            });
+        });
+        // Track form abandonment on page leave
+        window.addEventListener('beforeunload', function() {
+            var started = Object.keys(fieldInteraction);
+            if (started.length > 0 && !form.dataset.submitted) {
+                var completed = started.filter(function(k) { return fieldInteraction[k].completed; });
+                gtag('event', 'form_abandonment', { form_name: 'contact', fields_started: started.length, fields_completed: completed.length, last_field: started[started.length - 1] });
+            }
+        });
+        form.addEventListener('submit', function() { form.dataset.submitted = 'true'; });
+    }
+
+    // -- 3. Outbound link click tracking --
+    document.addEventListener('click', function(e) {
+        var link = e.target.closest('a[href]');
+        if (!link) return;
+        var href = link.getAttribute('href');
+        if (href && href.startsWith('http') && !href.includes('it9.uk')) {
+            gtag('event', 'outbound_click', { link_url: href, link_text: link.textContent.trim().substring(0, 100), link_location: link.closest('section')?.id || 'footer' });
+        }
+    });
+
+    // -- 4. Phone/email link click tracking --
+    document.querySelectorAll('a[href^="tel:"], a[href^="mailto:"]').forEach(function(link) {
+        link.addEventListener('click', function() {
+            var isTel = this.href.startsWith('tel:');
+            gtag('event', isTel ? 'phone_click' : 'email_click', { contact_method: isTel ? 'phone' : 'email', link_text: this.textContent.trim(), link_location: this.closest('section')?.id || this.closest('footer') ? 'footer' : 'unknown' });
+        });
+    });
+
+    // -- 5. Lightbox gallery engagement tracking --
+    if (typeof GLightbox !== 'undefined') {
+        var lightboxOpen = null;
+        var lightboxSlideStart = null;
+        document.addEventListener('glightbox-open', function() {
+            lightboxOpen = Date.now();
+            lightboxSlideStart = Date.now();
+            gtag('event', 'lightbox_open', { trigger_section: document.activeElement?.closest('section')?.id || 'unknown' });
+        });
+        document.addEventListener('glightbox-slide-changed', function(e) {
+            if (lightboxSlideStart) {
+                var dur = Math.round((Date.now() - lightboxSlideStart) / 1000);
+                if (dur >= 1) {
+                    gtag('event', 'lightbox_slide_view', { view_time_sec: dur });
+                }
+            }
+            lightboxSlideStart = Date.now();
+        });
+        document.addEventListener('glightbox-close', function() {
+            if (lightboxOpen) {
+                var totalDur = Math.round((Date.now() - lightboxOpen) / 1000);
+                gtag('event', 'lightbox_close', { total_view_time_sec: totalDur });
+                lightboxOpen = null;
+                lightboxSlideStart = null;
+            }
+        });
+        // Fallback: observe lightbox DOM for open/close since GLightbox may not fire custom events
+        var lbObserver = new MutationObserver(function(mutations) {
+            mutations.forEach(function(m) {
+                m.addedNodes.forEach(function(node) {
+                    if (node.classList && node.classList.contains('glightbox-container')) {
+                        lightboxOpen = Date.now();
+                        lightboxSlideStart = Date.now();
+                        gtag('event', 'lightbox_open', { method: 'dom_observer' });
+                    }
+                });
+                m.removedNodes.forEach(function(node) {
+                    if (node.classList && node.classList.contains('glightbox-container') && lightboxOpen) {
+                        var totalDur = Math.round((Date.now() - lightboxOpen) / 1000);
+                        gtag('event', 'lightbox_close', { total_view_time_sec: totalDur, method: 'dom_observer' });
+                        lightboxOpen = null;
+                    }
+                });
+            });
+        });
+        lbObserver.observe(document.body, { childList: true });
+    }
+
+    // -- Send remaining section engagement on page leave --
     window.addEventListener('beforeunload', function() {
         Object.keys(sectionTimers).forEach(function(id) {
             var duration = Math.round((Date.now() - sectionTimers[id]) / 1000);
