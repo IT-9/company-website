@@ -428,6 +428,52 @@ if (typeof GLightbox !== 'undefined') {
         lbObserver.observe(document.body, { childList: true });
     }
 
+    // -- 6. Navigation click tracking --
+    document.querySelectorAll('.nav-links a').forEach(function(link) {
+        link.addEventListener('click', function() {
+            gtag('event', 'nav_click', { link_text: this.textContent.trim(), link_target: this.getAttribute('href') });
+        });
+    });
+
+    // -- 7. Mobile menu usage tracking --
+    var menuBtn = document.querySelector('.mobile-menu-button');
+    if (menuBtn) {
+        menuBtn.addEventListener('click', function() {
+            var isOpening = !document.querySelector('.nav-links').classList.contains('active');
+            gtag('event', 'mobile_menu', { action: isOpening ? 'open' : 'close', viewport_width: window.innerWidth });
+        });
+    }
+
+    // -- 8. Page visibility / tab switching tracking --
+    var visibilityStart = Date.now();
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            var activeTime = Math.round((Date.now() - visibilityStart) / 1000);
+            gtag('event', 'tab_hidden', { active_time_sec: activeTime });
+        } else {
+            visibilityStart = Date.now();
+            gtag('event', 'tab_visible', {});
+        }
+    });
+
+    // -- 9. Returning visitor detection --
+    (function() {
+        var visitCount = parseInt(localStorage.getItem('it9_visit_count') || '0', 10) + 1;
+        var firstVisit = localStorage.getItem('it9_first_visit') || new Date().toISOString();
+        localStorage.setItem('it9_visit_count', visitCount.toString());
+        localStorage.setItem('it9_first_visit', firstVisit);
+        gtag('event', 'visitor_info', { visitor_type: visitCount === 1 ? 'new' : 'returning', visit_count: visitCount, first_visit_date: firstVisit.split('T')[0] });
+    })();
+
+    // -- 10. UTM traffic source tagging --
+    (function() {
+        var params = new URLSearchParams(window.location.search);
+        var utmSource = params.get('utm_source');
+        if (utmSource) {
+            gtag('event', 'campaign_visit', { utm_source: utmSource, utm_medium: params.get('utm_medium') || '', utm_campaign: params.get('utm_campaign') || '', utm_content: params.get('utm_content') || '' });
+        }
+    })();
+
     // -- Send remaining section engagement on page leave --
     window.addEventListener('beforeunload', function() {
         Object.keys(sectionTimers).forEach(function(id) {
