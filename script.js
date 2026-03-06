@@ -474,6 +474,104 @@ if (typeof GLightbox !== 'undefined') {
         }
     })();
 
+    // -- 11. Custom conversion funnel tracking --
+    (function() {
+        var funnelKey = 'it9_funnel';
+        var funnel = JSON.parse(sessionStorage.getItem(funnelKey) || '{}');
+        // Step 1: Page load (landing)
+        if (!funnel.landed) {
+            funnel.landed = true;
+            funnel.landTime = Date.now();
+            gtag('event', 'funnel_step', { step: 1, step_name: 'page_land', referrer: document.referrer || 'direct' });
+        }
+        sessionStorage.setItem(funnelKey, JSON.stringify(funnel));
+        // Step 2: View products section
+        var productsSection = document.getElementById('products');
+        if (productsSection) {
+            var prodObserver = new IntersectionObserver(function(entries) {
+                if (entries[0].isIntersecting && !funnel.viewedProducts) {
+                    funnel.viewedProducts = true;
+                    sessionStorage.setItem(funnelKey, JSON.stringify(funnel));
+                    gtag('event', 'funnel_step', { step: 2, step_name: 'view_products', time_from_land_sec: Math.round((Date.now() - funnel.landTime) / 1000) });
+                    prodObserver.disconnect();
+                }
+            }, { threshold: 0.3 });
+            prodObserver.observe(productsSection);
+        }
+        // Step 3: Scroll to contact section
+        var contactSection = document.getElementById('contact');
+        if (contactSection) {
+            var contactObserver = new IntersectionObserver(function(entries) {
+                if (entries[0].isIntersecting && !funnel.viewedContact) {
+                    funnel.viewedContact = true;
+                    sessionStorage.setItem(funnelKey, JSON.stringify(funnel));
+                    gtag('event', 'funnel_step', { step: 3, step_name: 'view_contact', time_from_land_sec: Math.round((Date.now() - funnel.landTime) / 1000) });
+                    contactObserver.disconnect();
+                }
+            }, { threshold: 0.3 });
+            contactObserver.observe(contactSection);
+        }
+        // Step 4: Form submit (tracked via existing form_submit event + funnel marker)
+        if (form) {
+            form.addEventListener('submit', function() {
+                funnel.submitted = true;
+                sessionStorage.setItem(funnelKey, JSON.stringify(funnel));
+                gtag('event', 'funnel_step', { step: 4, step_name: 'form_submit', time_from_land_sec: Math.round((Date.now() - funnel.landTime) / 1000) });
+            });
+        }
+    })();
+
+    // -- 12. Core Web Vitals tracking --
+    (function() {
+        // Largest Contentful Paint
+        if ('PerformanceObserver' in window) {
+            try {
+                new PerformanceObserver(function(list) {
+                    var entries = list.getEntries();
+                    var lastEntry = entries[entries.length - 1];
+                    gtag('event', 'web_vital_lcp', { value_ms: Math.round(lastEntry.startTime), rating: lastEntry.startTime < 2500 ? 'good' : lastEntry.startTime < 4000 ? 'needs_improvement' : 'poor' });
+                }).observe({ type: 'largest-contentful-paint', buffered: true });
+            } catch(e) {}
+            // First Input Delay
+            try {
+                new PerformanceObserver(function(list) {
+                    var entry = list.getEntries()[0];
+                    gtag('event', 'web_vital_fid', { value_ms: Math.round(entry.processingStart - entry.startTime), rating: (entry.processingStart - entry.startTime) < 100 ? 'good' : (entry.processingStart - entry.startTime) < 300 ? 'needs_improvement' : 'poor' });
+                }).observe({ type: 'first-input', buffered: true });
+            } catch(e) {}
+            // Cumulative Layout Shift
+            try {
+                var clsValue = 0;
+                new PerformanceObserver(function(list) {
+                    list.getEntries().forEach(function(entry) {
+                        if (!entry.hadRecentInput) clsValue += entry.value;
+                    });
+                    gtag('event', 'web_vital_cls', { value: Math.round(clsValue * 1000) / 1000, rating: clsValue < 0.1 ? 'good' : clsValue < 0.25 ? 'needs_improvement' : 'poor' });
+                }).observe({ type: 'layout-shift', buffered: true });
+            } catch(e) {}
+        }
+        // Page load timing
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                var timing = performance.getEntriesByType('navigation')[0];
+                if (timing) {
+                    gtag('event', 'page_load_timing', { dns_ms: Math.round(timing.domainLookupEnd - timing.domainLookupStart), connect_ms: Math.round(timing.connectEnd - timing.connectStart), ttfb_ms: Math.round(timing.responseStart - timing.requestStart), dom_ready_ms: Math.round(timing.domContentLoadedEventEnd - timing.startTime), load_complete_ms: Math.round(timing.loadEventEnd - timing.startTime) });
+                }
+            }, 0);
+        });
+    })();
+
+    // -- 13. PDF/document download tracking --
+    document.addEventListener('click', function(e) {
+        var link = e.target.closest('a[href]');
+        if (!link) return;
+        var href = link.getAttribute('href') || '';
+        var ext = href.split('.').pop().toLowerCase().split('?')[0];
+        if (['pdf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'csv', 'zip'].indexOf(ext) !== -1) {
+            gtag('event', 'file_download', { file_name: href.split('/').pop(), file_extension: ext, link_text: link.textContent.trim().substring(0, 100) });
+        }
+    });
+
     // -- Send remaining section engagement on page leave --
     window.addEventListener('beforeunload', function() {
         Object.keys(sectionTimers).forEach(function(id) {
