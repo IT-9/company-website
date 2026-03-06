@@ -1,3 +1,22 @@
+// Cookie consent banner
+(function() {
+    var consent = localStorage.getItem('it9_cookie_consent');
+    var banner = document.getElementById('cookie-banner');
+    if (!banner) return;
+    if (!consent) {
+        banner.style.display = 'block';
+    }
+    document.getElementById('cookie-accept')?.addEventListener('click', function() {
+        localStorage.setItem('it9_cookie_consent', 'accepted');
+        banner.style.display = 'none';
+        if (typeof loadGA === 'function') loadGA();
+    });
+    document.getElementById('cookie-decline')?.addEventListener('click', function() {
+        localStorage.setItem('it9_cookie_consent', 'declined');
+        banner.style.display = 'none';
+    });
+})();
+
 // Smooth scrolling for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {

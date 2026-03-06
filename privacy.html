@@ -3,13 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1L0EVM0EG0"></script>
+    <!-- Google Analytics - loaded only after cookie consent -->
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-1L0EVM0EG0');
+        function loadGA() {
+            if (document.getElementById('ga-script')) return;
+            var s = document.createElement('script');
+            s.id = 'ga-script';
+            s.async = true;
+            s.src = 'https://www.googletagmanager.com/gtag/js?id=G-1L0EVM0EG0';
+            document.head.appendChild(s);
+            gtag('js', new Date());
+            gtag('config', 'G-1L0EVM0EG0');
+        }
+        if (localStorage.getItem('it9_cookie_consent') === 'accepted') { loadGA(); }
     </script>
     <title>Privacy Policy - IT9</title>
     <meta name="description" content="Privacy policy for IT9 Ltd. How we collect, use and protect your data when you visit it9.uk.">
@@ -167,6 +175,17 @@
             </div>
         </div>
     </footer>
+
+    <!-- Cookie Consent Banner -->
+    <div id="cookie-banner" class="cookie-banner" role="dialog" aria-label="Cookie consent" style="display:none;">
+        <div class="cookie-banner-content">
+            <p>We use cookies to analyse website traffic and improve your experience. See our <a href="privacy.html">Privacy Policy</a> for details.</p>
+            <div class="cookie-banner-buttons">
+                <button id="cookie-accept" class="cookie-btn cookie-btn-accept">Accept</button>
+                <button id="cookie-decline" class="cookie-btn cookie-btn-decline">Decline</button>
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
