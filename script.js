@@ -264,4 +264,59 @@ var aboutSlider = createSlider('.about-slider');
 // Initialize GLightbox for hero gallery
 if (typeof GLightbox !== 'undefined') {
     const heroLightbox = GLightbox({ selector: '.glightbox', openEffect: 'zoom', closeEffect: 'fade', loop: true, touchNavigation: true, keyboardNavigation: true, closeOnOutsideClick: true });
-} 
+}
+
+// GA4 section engagement tracking
+(function() {
+    if (typeof gtag !== 'function') return;
+    var sections = document.querySelectorAll('section[id]');
+    var sectionTimers = {};
+    var sectionViewed = {};
+
+    // Track when sections become visible
+    var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            var id = entry.target.id;
+            if (entry.isIntersecting) {
+                sectionTimers[id] = Date.now();
+                if (!sectionViewed[id]) {
+                    sectionViewed[id] = true;
+                    gtag('event', 'section_view', { section_name: id, section_title: entry.target.querySelector('h2')?.textContent?.trim() || id });
+                }
+            } else if (sectionTimers[id]) {
+                var duration = Math.round((Date.now() - sectionTimers[id]) / 1000);
+                if (duration >= 2) {
+                    gtag('event', 'section_engagement', { section_name: id, engagement_time_sec: duration });
+                }
+                delete sectionTimers[id];
+            }
+        });
+    }, { threshold: 0.3 });
+
+    sections.forEach(function(section) { observer.observe(section); });
+
+    // Track CTA button clicks
+    document.querySelectorAll('.cta-button, .hero-cta').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            gtag('event', 'cta_click', { button_text: this.textContent.trim(), button_location: this.closest('section')?.id || 'unknown' });
+        });
+    });
+
+    // Track contact form submission
+    var form = document.getElementById('contactForm');
+    if (form) {
+        form.addEventListener('submit', function() {
+            gtag('event', 'form_submit', { form_name: 'contact' });
+        });
+    }
+
+    // Send remaining engagement time on page leave
+    window.addEventListener('beforeunload', function() {
+        Object.keys(sectionTimers).forEach(function(id) {
+            var duration = Math.round((Date.now() - sectionTimers[id]) / 1000);
+            if (duration >= 2) {
+                gtag('event', 'section_engagement', { section_name: id, engagement_time_sec: duration });
+            }
+        });
+    });
+})();
