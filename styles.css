@@ -807,7 +807,7 @@ section h2 {
 .grant-popup-close {
     position: absolute;
     top: 10px;
-    left: 10px;
+    right: 10px;
     width: 32px;
     height: 32px;
     border-radius: 50%;
@@ -839,20 +839,22 @@ section h2 {
 }
 
 .grant-popup-title {
-    font-size: 1.35rem;
+    font-size: 1.5rem;
     font-weight: 700;
     color: var(--primary-color);
-    margin-bottom: 0.15rem;
-    text-align: left;
+    margin-bottom: 0.1rem;
+    text-align: center;
     padding: 0;
 }
 
-.grant-popup-subtitle {
-    font-size: 1.15rem;
-    font-weight: 600;
-    color: var(--text-color);
+.grant-popup-title-red {
+    color: var(--primary-color);
     margin-bottom: 1rem;
-    padding: 0;
+}
+
+.grant-popup-rail-mode {
+    color: var(--text-color);
+    font-weight: 700;
 }
 
 .grant-popup-body p {
@@ -906,11 +908,7 @@ section h2 {
     }
 
     .grant-popup-title {
-        font-size: 1.2rem;
-    }
-
-    .grant-popup-subtitle {
-        font-size: 1.05rem;
+        font-size: 1.25rem;
     }
 
     .grant-popup-body p {
