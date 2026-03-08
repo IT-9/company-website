@@ -840,7 +840,7 @@ section h2 {
 
 .grant-popup-header {
     background: var(--primary-color);
-    padding: 1.25rem 1.75rem;
+    padding: 0.25rem 0.75rem;
 }
 
 .grant-popup-title {
@@ -913,7 +913,7 @@ section h2 {
     }
 
     .grant-popup-header {
-        padding: 1rem 1.25rem;
+        padding: 0.25rem 0.75rem;
     }
 
     .grant-popup-title {
