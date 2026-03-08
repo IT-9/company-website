@@ -1,3 +1,44 @@
+// PSVAIR Grant promotion popup
+(function() {
+    var popup = document.getElementById('grant-popup-overlay');
+    var closeBtn = document.getElementById('grant-popup-close');
+    var ctaBtn = document.getElementById('grant-popup-cta');
+    if (!popup) return;
+
+    // Show popup after a short delay on page load, once per session
+    var dismissed = sessionStorage.getItem('it9_grant_popup_dismissed');
+    if (!dismissed) {
+        setTimeout(function() {
+            popup.style.display = 'flex';
+        }, 1500);
+    }
+
+    function closePopup() {
+        popup.style.display = 'none';
+        sessionStorage.setItem('it9_grant_popup_dismissed', '1');
+    }
+
+    closeBtn.addEventListener('click', closePopup);
+
+    // Close on overlay click (outside the popup box)
+    popup.addEventListener('click', function(e) {
+        if (e.target === popup) closePopup();
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && popup.style.display === 'flex') closePopup();
+    });
+
+    // CTA button closes popup and scrolls to contact
+    ctaBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        closePopup();
+        var contactSection = document.querySelector('#contact');
+        if (contactSection) contactSection.scrollIntoView({ behavior: 'smooth' });
+    });
+})();
+
 // Cookie consent banner
 (function() {
     var consent = localStorage.getItem('it9_cookie_consent');

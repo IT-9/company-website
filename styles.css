@@ -765,6 +765,149 @@ section h2 {
     height: 300px;
 }
 
+/* PSVAIR Grant Promotion Popup */
+.grant-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 10001;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    animation: popupFadeIn 0.3s ease-out;
+}
+
+@keyframes popupFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes popupSlideIn {
+    from { opacity: 0; transform: scale(0.95) translateY(10px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.grant-popup {
+    position: relative;
+    background: var(--white);
+    border-radius: 12px;
+    overflow: hidden;
+    max-width: 520px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: popupSlideIn 0.35s ease-out;
+}
+
+.grant-popup-close {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(0, 0, 0, 0.55);
+    color: #fff;
+    font-size: 1.3rem;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: background 0.2s ease;
+}
+
+.grant-popup-close:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.grant-popup-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.grant-popup-content {
+    padding: 1.5rem 1.75rem 1.75rem;
+}
+
+.grant-popup-title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 0.15rem;
+    text-align: left;
+    padding: 0;
+}
+
+.grant-popup-subtitle {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+    padding: 0;
+}
+
+.grant-popup-body p {
+    font-size: 0.92rem;
+    line-height: 1.65;
+    color: #555;
+    margin-bottom: 0.75rem;
+    padding: 0;
+}
+
+.grant-popup-body p:last-child {
+    margin-bottom: 1.25rem;
+}
+
+.grant-popup-cta {
+    display: inline-block;
+    background: var(--primary-color);
+    color: var(--white);
+    text-decoration: none;
+    padding: 0.7rem 1.75rem;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.grant-popup-cta:hover {
+    background: var(--primary-darker);
+    transform: translateY(-1px);
+}
+
+@media (max-width: 560px) {
+    .grant-popup {
+        max-width: 100%;
+        border-radius: 10px;
+        max-height: 85vh;
+    }
+
+    .grant-popup-content {
+        padding: 1.25rem 1.25rem 1.5rem;
+    }
+
+    .grant-popup-title {
+        font-size: 1.2rem;
+    }
+
+    .grant-popup-subtitle {
+        font-size: 1.05rem;
+    }
+
+    .grant-popup-body p {
+        font-size: 0.88rem;
+    }
+}
+
 /* Cookie Consent Banner */
 .cookie-banner {
     position: fixed;
