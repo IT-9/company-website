@@ -812,7 +812,7 @@ section h2 {
     height: 32px;
     border-radius: 50%;
     border: none;
-    background: rgba(0, 0, 0, 0.55);
+    background: rgba(255, 255, 255, 0.25);
     color: #fff;
     font-size: 1.3rem;
     line-height: 1;
@@ -825,7 +825,7 @@ section h2 {
 }
 
 .grant-popup-close:hover {
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(255, 255, 255, 0.45);
 }
 
 .grant-popup-image img {
@@ -838,18 +838,22 @@ section h2 {
     padding: 1.5rem 1.75rem 1.75rem;
 }
 
+.grant-popup-header {
+    background: var(--primary-color);
+    padding: 1.25rem 1.75rem;
+}
+
 .grant-popup-title {
     font-size: 1.5rem;
     font-weight: 700;
-    color: var(--primary-color);
+    color: var(--white);
     margin-bottom: 0.1rem;
     text-align: center;
     padding: 0;
 }
 
-.grant-popup-title-red {
-    color: var(--primary-color);
-    margin-bottom: 1rem;
+.grant-popup-title-second {
+    margin-bottom: 0;
 }
 
 .grant-popup-rail-mode {
@@ -905,6 +909,10 @@ section h2 {
 
     .grant-popup-content {
         padding: 1.25rem 1.25rem 1.5rem;
+    }
+
+    .grant-popup-header {
+        padding: 1rem 1.25rem;
     }
 
     .grant-popup-title {
