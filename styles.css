@@ -885,10 +885,20 @@ section h2 {
 }
 
 @media (max-width: 560px) {
+    .grant-popup-overlay {
+        padding: 0.75rem;
+    }
+
     .grant-popup {
         max-width: 100%;
         border-radius: 10px;
         max-height: 85vh;
+    }
+
+    .grant-popup-close {
+        width: 36px;
+        height: 36px;
+        font-size: 1.4rem;
     }
 
     .grant-popup-content {
@@ -905,6 +915,12 @@ section h2 {
 
     .grant-popup-body p {
         font-size: 0.88rem;
+    }
+
+    .grant-popup-cta {
+        display: block;
+        text-align: center;
+        padding: 0.85rem 1.5rem;
     }
 }
 
