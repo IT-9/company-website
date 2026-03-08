@@ -874,7 +874,8 @@ section h2 {
 }
 
 .grant-popup-cta {
-    display: inline-block;
+    display: block;
+    text-align: center;
     background: var(--primary-color);
     color: var(--white);
     text-decoration: none;
